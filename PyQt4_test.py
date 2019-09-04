@@ -24,11 +24,15 @@ class Window(QtWidgets.QMainWindow):
 
     def home(self):
         btn =  QtWidgets.QPushButton('Quit', self)
-        # btn.clicked.connect(QtCore.QCoreApplication.instance().quit)
         btn.clicked.connect(self.close_application)
-        
         btn.resize(btn.minimumSizeHint())
         btn.move(100, 100)
+
+        extractAction = QtWidgets.QAction(QtGui.QIcon('icon.png'), 'Quit the application!', self)
+        extractAction.triggered.connect(self.close_application)
+
+        self.toolBar = self.addToolBar('Action')
+        self.toolBar.addAction(extractAction)
 
         self.show()
 
