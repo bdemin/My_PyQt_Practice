@@ -34,7 +34,17 @@ class Window(QtWidgets.QMainWindow):
         self.toolBar = self.addToolBar('Action')
         self.toolBar.addAction(extractAction)
 
+        checkBox = QtWidgets.QCheckBox('Enlarge Window', self)
+        checkBox.move(100, 15)
+        checkBox.stateChanged.connect(self.enlarge_window)
+
         self.show()
+
+    def enlarge_window(self, state):
+        if state == QtCore.Qt.Checked:
+            self.setGeometry(50, 50, 1000, 600)
+        else:
+            self.setGeometry(50, 50, 500, 300)
 
     def close_application(self):
         choice = QtWidgets.QMessageBox.question(self, 'Exit Window', 'Exit the app?', QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
