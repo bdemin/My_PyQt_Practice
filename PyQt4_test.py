@@ -38,8 +38,21 @@ class Window(QtWidgets.QMainWindow):
         checkBox.move(100, 15)
         checkBox.stateChanged.connect(self.enlarge_window)
 
+        self.progress = QtWidgets.QProgressBar(self)
+        self.progress.setGeometry(200, 80, 250, 20)
+        
+        self.btn = QtWidgets.QPushButton('Download', self)
+        self.btn.move(200, 120)
+        self.btn.clicked.connect(self.download)
+
         self.show()
 
+    def download(self):
+        self.completed = 0
+        while self.completed < 100:
+            self.completed += 0.0001
+            self.progress.setValue(self.completed)
+            
     def enlarge_window(self, state):
         if state == QtCore.Qt.Checked:
             self.setGeometry(50, 50, 1000, 600)
