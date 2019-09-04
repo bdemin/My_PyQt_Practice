@@ -12,12 +12,17 @@ class Window(QtWidgets.QMainWindow):
 
     def home(self):
         btn =  QtWidgets.QPushButton('Quit', self)
-        btn.clicked.connect(QtCore.QCoreApplication.instance().quit)
+        # btn.clicked.connect(QtCore.QCoreApplication.instance().quit)
+        btn.clicked.connect(self.close_application)
         
-        btn.resize(100, 100)
-        btn.move(100, 100)
+        btn.resize(btn.minimumSizeHint())
+        btn.move(0, 0)
 
         self.show()
+
+    def close_application(self):
+        print('Application Terminated')
+        sys.exit()
 
 
 def run():
