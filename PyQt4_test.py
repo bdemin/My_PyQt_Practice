@@ -1,5 +1,5 @@
 import sys
-from PyQt5 import QtWidgets, QtGui
+from PyQt5 import QtWidgets, QtGui, QtCore
 
 
 class Window(QtWidgets.QMainWindow):
@@ -8,9 +8,22 @@ class Window(QtWidgets.QMainWindow):
         self.setGeometry(50, 50, 500, 300)
         self.setWindowTitle("PyQt!")
         self.setWindowIcon(QtGui.QIcon('logo.png'))
+        self.home()
+
+    def home(self):
+        btn =  QtWidgets.QPushButton('Quit', self)
+        btn.clicked.connect(QtCore.QCoreApplication.instance().quit)
+        
+        btn.resize(100, 100)
+        btn.move(100, 100)
+
         self.show()
 
 
-app = QtWidgets.QApplication(sys.argv)
-GUI = Window()
-sys.exit(app.exec_())
+def run():
+    app = QtWidgets.QApplication(sys.argv)
+    GUI = Window()
+    sys.exit(app.exec_())
+
+
+run()
