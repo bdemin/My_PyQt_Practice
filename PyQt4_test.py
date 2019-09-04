@@ -37,9 +37,13 @@ class Window(QtWidgets.QMainWindow):
         self.show()
 
     def close_application(self):
-        print('Application Terminated')
-        sys.exit()
-
+        choice = QtWidgets.QMessageBox.question(self, 'Exit Window', 'Exit the app?', QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
+        if choice == QtWidgets.QMessageBox.Yes:
+            print('Quitting Now')
+            sys.exit()
+        else:
+            pass
+                                                    
 
 def run():
     app = QtWidgets.QApplication(sys.argv)
