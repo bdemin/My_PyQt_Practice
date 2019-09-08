@@ -82,6 +82,7 @@ class Window(QtWidgets.QMainWindow):
         else:
             self.setGeometry(50, 50, 500, 300)
 
+
     def close_application(self):
         choice = QtWidgets.QMessageBox.question(self, 'Exit Window', 'Exit the app?', QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
         if choice == QtWidgets.QMessageBox.Yes:
