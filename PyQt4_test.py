@@ -11,22 +11,22 @@ class Window(QtWidgets.QMainWindow):
         self.setWindowIcon(QtGui.QIcon('logo.png'))
 
         extractAction = QtWidgets.QAction('&GET TO THE CHOPPAH!', self)
-        extractAction.setShortcut('Ctrl + Q')
+        extractAction.setShortcut('Ctrl+Q')
         extractAction.setStatusTip('Leave The App')
         extractAction.triggered.connect(self.close_application)
 
         openEditor = QtWidgets.QAction('&Editor', self)
-        openEditor.setShortcut('Ctrl + E')
+        openEditor.setShortcut('Ctrl+E')
         openEditor.setStatusTip('Open Editor')
         openEditor.triggered.connect(self.editor)
 
         openFile = QtWidgets.QAction('&Open File', self)
-        openFile.setShortcut('Ctrl + O')
+        openFile.setShortcut('Ctrl+O')
         openFile.setStatusTip('Open File')
         openFile.triggered.connect(self.file_open)
         
         saveFile = QtWidgets.QAction('&Save File', self)
-        saveFile.setShortcut('Ctrl + S')
+        saveFile.setShortcut('Ctrl+S')
         saveFile.setStatusTip('Save File')
         saveFile.triggered.connect(self.file_save)
         
