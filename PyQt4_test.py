@@ -1,4 +1,5 @@
 import sys
+
 from PyQt5 import QtWidgets, QtGui, QtCore
 
 
@@ -22,6 +23,7 @@ class Window(QtWidgets.QMainWindow):
 
         self.home()
 
+
     def home(self):
         btn =  QtWidgets.QPushButton('Quit', self)
         btn.clicked.connect(self.close_application)
@@ -30,12 +32,20 @@ class Window(QtWidgets.QMainWindow):
 
         extractAction = QtWidgets.QAction(QtGui.QIcon('icon.png'), 'Quit the application!', self)
         extractAction.triggered.connect(self.close_application)
-
         self.toolBar = self.addToolBar('Action')
         self.toolBar.addAction(extractAction)
 
+        fontChoice = QtWidgets.QAction('Font', self)
+        fontChoice.triggered.connect(self.font_choice)
+        self.toolBar.addAction(fontChoice)
+
+        color = QtGui.QColor(0, 0, 0)
+        fontColor = QtWidgets.QAction('Font BG Color', self)
+        fontColor.triggered.connect(self.color_picker)
+        self.toolBar.addAction(fontColor)
+
         checkBox = QtWidgets.QCheckBox('Enlarge Window', self)
-        checkBox.move(100, 15)
+        checkBox.move(300, 15)
         checkBox.stateChanged.connect(self.enlarge_window)
 
         self.progress = QtWidgets.QProgressBar(self)
@@ -60,9 +70,24 @@ class Window(QtWidgets.QMainWindow):
         self.styleChoice.move(50, 150)
         comboBox.activated[str].connect(self.style_choice)
 
+        cal = QtWidgets.QCalendarWidget(self)
+        cal.move(500, 200)
+        cal.resize(200, 200)
+
         self.show()
+    
 
-
+    def color_picker(self):
+        color = QtWidgets.QColorDialog.getColor()
+        self.styleChoice.setStyleSheet('QWidget {background-color: %s}' % color.name())
+   
+   
+    def font_choice(self):
+        font, valid = QtWidgets.QFontDialog.getFont()
+        if valid:
+            self.styleChoice.setFont(font)
+    
+    
     def style_choice(self, text):
         self.styleChoice.setText(text)
         QtWidgets.QApplication.setStyle(QtWidgets.QStyleFactory.create(text))
