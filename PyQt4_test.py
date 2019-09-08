@@ -22,15 +22,16 @@ class Window(QtWidgets.QMainWindow):
 
         openFile = QtWidgets.QAction('&Open File', self)
         openFile.setShortcut('Ctrl + O')
-        openFile.setStatusTip('Open Editor')
-        openFile.triggered.connect(self.editor)
+        openFile.setStatusTip('Open File')
+        openFile.triggered.connect(self.file_open)
         
         self.statusBar()
 
         mainMenu = self.menuBar()
         fileMenu = mainMenu.addMenu('&File')
         fileMenu.addAction(extractAction)
-        
+        fileMenu.addAction(openFile)
+
         editorMenu = mainMenu.addMenu('&Editor')
         editorMenu.addAction(openEditor)
 
@@ -93,6 +94,16 @@ class Window(QtWidgets.QMainWindow):
     def editor(self):
         self.textEdit = QtWidgets.QTextEdit()
         self.setCentralWidget(self.textEdit)
+
+    def file_open(self):
+        name = QtWidgets.QFileDialog.getOpenFileName(self, 'Open File')
+        file = open(name[0], 'r')
+
+        self.editor()
+
+        with file:
+            text = file.read()
+            self.textEdit.setText(text)
 
 
     def color_picker(self):
