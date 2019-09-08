@@ -25,12 +25,18 @@ class Window(QtWidgets.QMainWindow):
         openFile.setStatusTip('Open File')
         openFile.triggered.connect(self.file_open)
         
+        saveFile = QtWidgets.QAction('&Save File', self)
+        saveFile.setShortcut('Ctrl + S')
+        saveFile.setStatusTip('Save File')
+        saveFile.triggered.connect(self.file_save)
+        
         self.statusBar()
 
         mainMenu = self.menuBar()
         fileMenu = mainMenu.addMenu('&File')
         fileMenu.addAction(extractAction)
         fileMenu.addAction(openFile)
+        fileMenu.addAction(saveFile)
 
         editorMenu = mainMenu.addMenu('&Editor')
         editorMenu.addAction(openEditor)
@@ -95,6 +101,7 @@ class Window(QtWidgets.QMainWindow):
         self.textEdit = QtWidgets.QTextEdit()
         self.setCentralWidget(self.textEdit)
 
+
     def file_open(self):
         name = QtWidgets.QFileDialog.getOpenFileName(self, 'Open File')
         file = open(name[0], 'r')
@@ -104,6 +111,14 @@ class Window(QtWidgets.QMainWindow):
         with file:
             text = file.read()
             self.textEdit.setText(text)
+
+
+    def file_save(self):
+        name = QtWidgets.QFileDialog.getSaveFileName(self, 'Save File')
+        file = open(name[0], 'w')
+        text = self.textEdit.toPlainText()
+        file.write(text)
+        file.close()
 
 
     def color_picker(self):
